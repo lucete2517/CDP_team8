@@ -3,5 +3,4 @@
 
 HOME_PAGE
 
-test_ver.01 = database value를 homepage에 불러오기 (http://localhost:3000/)
-\n-> next ver) UI chart graph 표현
+test_ver.01 = database value를 homepage에 불러오기 (http://localhost:3000/) -> next ver) UI chart graph 표현
