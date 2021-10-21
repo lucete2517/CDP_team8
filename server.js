@@ -1,9 +1,9 @@
-var express = require('express');
-var http = require('http');
-var mysql = require('mysql');
+const express = require('express');
+const http = require('http');
+const mysql = require('mysql');
 
-var app = express();
-app.use('.', express.static(__dirname + '.'));
+const app = express();
+app.use(express.static(__dirname));
 
 var client = mysql.createConnection({
     host : 'localhost',
@@ -20,19 +20,13 @@ function insert_person() {
     var Position = document.getElementById('Position');
     var Email = document.getElementById('Email');
     var Password = document.getElementById('Password');
-    var Blood_type = document.getElementById('Rrn');
-    var Phone_number = document.getElementById('Rrn');
-    console.log('insert into PERSON values(\'' + Pid.value + '\', \'' + Pname.value + '\', \'' + Rrn.value + '\', \'' + Position.value + 
-    '\', \'' + Email.value + '\', \'' + Password.value + '\', \'' + Blood_type.value + '\', \'' + Phone_number.value + '\');');
-    client.query('insert into PERSON values(\'' + Pid.value + '\', \'' + Pname.value + '\', \'' + Rrn.value + '\', \'' + Position.value + 
-    '\', \'' + Email.value + '\', \'' + Password.value + '\', \'' + Blood_type.value + '\', \'' + Phone_number.value + '\');');
+    var Blood_type = document.getElementById('Blood_type');
+    var Phone = document.getElementById('Phone');
+    console.log('insert into PERSON values(\'' + Pid.value + '\', \'' + Pname.value + '\', \'' + Rrn.value + '\', \'' + Position.value + '\', \'' + Email.value + '\', \'' + Password.value + '\', \'' + Blood_type.value + '\', \'' + Phone.value + '\');');
+    //client.query('insert into PERSON values(\'' + Pid.value + '\', \'' + Pname.value + '\', \'' + Rrn.value + '\', \'' + Position.value + '\', \'' + Email.value + '\', \'' + Password.value + '\', \'' + Blood_type.value + '\', \'' + Phone.value + '\');');
 }
 
-function hello_world(){
-    console.log('Hello, world!');
-}
-
-app.listen(1234, function(){
+app.listen(3000, function(){
     console.log('Server opened.\n');
 });
 
