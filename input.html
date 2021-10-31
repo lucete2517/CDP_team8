@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title> input </title>
-    <script src="server.js"></script>
+    <script src="functions/functions.js"></script>
 </head>
 <body>
     <p>
@@ -14,13 +14,13 @@
         <input type="text" id="Rrn" placeholder="Rrn" size="14" maxlength="14">
         <input type="text" id="Email" placeholder="Email" size="32" maxlength="32">
         <input type="text" id="Phone" placeholder="Phone" size="13" maxlength="13">
-        <button type="button" onclick="insert_person()">Insert</button>
+        <button type="button" onclick="insert_person(client)">Insert</button>
     </p>
     <p>
         EQUIP
         <input type="text" id="Eid" placeholder="Eid" size="4" maxlength="4">
         <input type="text" id="Ename" placeholder="Ename" size="16" maxlength="16">
-        <button type="button" onclick="insert_equip()">Insert</button>
+        <button type="button" onclick="insert_equip(client)">Insert</button>
     </p>
 </body>
 </html>
