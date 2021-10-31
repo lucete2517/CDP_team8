@@ -21,7 +21,7 @@ var sql2 = 'SELECT * FROM module; ';
 
 test.use(express.static(path.join(__dirname, 'public')));
 
-test.get('/', (request, response) => {
+test.get('/', function(request, response) {
     conn.query(sql1 + sql2, function(err, result, fields) {
         if(err) throw err;
 
