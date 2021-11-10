@@ -17,3 +17,4 @@ test_ver.03 = public 폴더를 통하여 server에서 html 전송, example chart
 
 test_ver.04 = beta_ver 완료. (날짜별 사고 통계 chart)
 
+->next ver) cloud 환경에서 실행.
