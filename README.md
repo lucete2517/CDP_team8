@@ -13,4 +13,7 @@ test_ver.02 = database table을 여러개 사용 query value를 homepage에 불�
 
 test_ver.03 = public 폴더를 통하여 server에서 html 전송, example chart 받아와서 html로 post
 
-->next ver) json parsing 하여 chat 값 변경
+->next ver) json parsing 하여 chart 값 변경
+
+test_ver.04 = beta_ver 완료. (날짜별 사고 통계 chart)
+
