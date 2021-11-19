@@ -15,4 +15,4 @@ ver_2 = JAVA, php를 통해 db연결 성공.
 
 외부 접근IP ) 222.103.154.206
 
-next_ver) UI작업, 주석처리
+->next_ver) UI작업, 주석처리
