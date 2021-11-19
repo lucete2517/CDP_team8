@@ -13,4 +13,4 @@ ver_2 = JAVA, php를 통해 db연결 성공.
 
 --- 1차 version 구현 완료 ---
 
-next_ver) UI작업
+next_ver) UI작업, 주석처리
