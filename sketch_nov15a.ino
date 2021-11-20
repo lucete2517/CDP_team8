@@ -8,13 +8,13 @@
 #define ECHO 44 //핀번호
 
 //wifi 정보
-const char* ssid = ""; //wifi 이름
-const char* password = "" //wifi 비번
+const char* ssid = "iptime"; //wifi 이름
+const char* password = "best1008!!"; //wifi 비번
 
 //sql 연결셋팅부
-IPAddress server_addr(192, 168, 100, 19); // DB ip
-! char user[] = ""; //DB ID
-char password_[] = ""; //DB password
+IPAddress server_addr(222, 103, 154, 206); // DB ip
+char user[] = "root"; //DB ID
+char password_[] = "456258"; //DB password
 
 WiFiClient client;
 MySQL_Connection conn(&client);
@@ -25,8 +25,7 @@ char INSERT_SQL[] = ""; //쿼리문
 void setup() {
   Serial.begin(115200); //전송속도 (와이파이가 대체로 115200으로 사용한다고 함)
 
-  wifi_connect();
-  setupDateTime();
+  Wifi_connect();
 
   Serial.print("Connecting to SQL... ");
   if (conn.connect(server_addr, 3306, user, password_)) {
@@ -60,13 +59,13 @@ void loop() {
   Serial.print("distance = " + (String)distance);
   Serial.println("mm\n");
 
-  sprintf(INSERT_SQL, "INSERT INTO 테이블명 VALUES (%d)", distance); //SQL 선언
+  sprintf(INSERT_SQL, "INSERT INTO test02.sensor VALUES (%d)", distance); //SQL 선언
 
   if (conn.connected()) {
     cursor->execute(INSERT_SQL); //DB에 SQL 입력
   }
 
-  delay(1000); //1초
+  delay(1000000); //1초
 }
 
 void Wifi_connect() {
