@@ -23,4 +23,4 @@ test_ver.05 = beta_ver 완료. (cloud 환경에서 실행.)
 
 ----- beta_ver 완료. ---------
 
-->next ver) 관리자 char 개발.
+->next ver) 관리자 chart 개발.
