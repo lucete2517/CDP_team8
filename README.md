@@ -24,3 +24,7 @@ test_ver.05 = beta_ver 완료. (cloud 환경에서 실행.)
 ----- beta_ver 완료. ---------
 
 ->next ver) 관리자 chart 개발.
+
+test_ver.06 = 관리자 chart 완료, database 완료.
+
+전체 사용 라이브러리 : (chart.js, ejs, node.js(express), mysql)
