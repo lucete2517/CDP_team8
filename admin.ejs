@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> 
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin page</title>
+</head>
+<body>
+    <!-- rendering 된 data를 parsing 하기위한 변수 선언 -->
+    
+    <!-- weight 상한선, distance 하한선 지정 -->
+    <% let Weight_up_limit = 700 %>
+    <% let Distance_down_limit = 700 %>
+    
+    <% let total_time_stamp = [] %>
+    <% let Weight = [] %>
+    <% let Distance = [] %>
+    <% let Weight_limit = [] %>
+    <% let Distance_limit = [] %>
+
+    <!-- 각 센서 에 대한 data 저장 -->
+    <% for(var j=0; j<data.length; j++) {%>
+        <% Weight.push(data[j].Weight) %>
+        <% Weight_limit.push(Weight_up_limit) %>
+        <% Distance.push(data[j].Distance) %>
+        <% Distance_limit.push(Distance_down_limit) %>
+        <% total_time_stamp.push(data[j].TIME) %>
+    <%}%>
+
+    <h1>Product001의 sensor 현황</h1>
+
+    Weight Sensor
+    <canvas id = "line-chart" width = "500vw" height="500vw"></canvas> <br>
+    
+    Distance Sensor<br>
+    <canvas id = "line-chart2" width = "500vw" height="500vw"></canvas> <br>
+
+    <script>
+        const lineChart = new Chart(document.getElementById("line-chart"), {
+            type: 'line',
+            data: {
+            labels: <%- JSON.stringify(total_time_stamp); %> ,
+            datasets: [
+                {
+                data: <%- JSON.stringify(Weight); %>,
+                label: "Weight (g)",
+                borderColor: "#c25080",
+                fill: false
+                },
+                {
+                data: <%- JSON.stringify(Weight_limit); %>,
+                label: "기준선",
+                borderColor: "#c45850",
+                fill: false,
+                pointRadius: 0
+                }
+            ]
+            },
+            options: {
+                responsive:false,
+                scales: {
+				    yAxes: [{
+					    ticks: {
+						    min: 0,
+                            max: 1000
+					    }
+				    }]
+			    },
+                title: {
+                    display: true,
+                    text: '시간별 Weight Sensor Value 현황'
+                }
+            }
+        });
+    </script>
+
+<script>
+    const lineChart2 = new Chart(document.getElementById("line-chart2"), {
+        type: 'line',
+            data: {
+            labels: <%- JSON.stringify(total_time_stamp); %> ,
+            datasets: [
+                {
+                data: <%- JSON.stringify(Distance); %>,
+                label: "Distance (mm)",
+                borderColor: "#3e95cd",
+                fill: false
+                },
+                {
+                data: <%- JSON.stringify(Distance_limit); %>,
+                label: "기준선",
+                borderColor: "#c45850",
+                fill: false,
+                pointRadius: 0
+                }
+            ]
+            },
+            options: {
+                responsive:false,
+                scales: {
+				    yAxes: [{
+					    ticks: {
+						    min: 0,
+                            max: 7000
+					    }
+				    }]
+			    },
+                title: {
+                    display: true,
+                    text: '시간별 Distance Sensor Value 현황'
+                }
+            }
+    });
+</script>
+
+</body>
+</html>
