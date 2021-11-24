@@ -5,7 +5,7 @@
 
     include('dbcon.php');
 
-    $stmt = $con->prepare('select * from module_list');
+    $stmt = $con->prepare('select * from product_list');
     $stmt->execute();
 
     if($stmt->rowCount() > 0)
@@ -16,7 +16,7 @@
         {
             extract($row);
 
-            array_push($data, array('MID'=>$MID));
+            array_push($data, array('ProductID'=>$ProductID));
         }
 
         header('Content-Type: application/json; charset=utf8');

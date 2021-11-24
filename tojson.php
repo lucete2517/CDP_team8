@@ -9,17 +9,17 @@
 
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
-        $MID=$_POST['MID'];
+        $ProductID=$_POST['ProductID'];
 
-        if(empty($MID)){
-            $errMSG = "insert MID";
+        if(empty($ProductID)){
+            $errMSG = "insert ProductID";
         }
 
         if(!isset($errMSG))
         {
             try{
-                $stmt = $con->prepare('INSERT INTO module4(MID) VALUES(:MID)');
-                $stmt->bindParam(':MID', $MID);
+                $stmt = $con->prepare('INSERT INTO module(ProductID) VALUES(:ProductID)');
+                $stmt->bindParam(':ProductID', $ProductID);
 
                 if($stmt->execute())
                 {
