@@ -64,6 +64,7 @@ void setup()
   pinMode(TRIG, OUTPUT);
   pinMode(ECHO, INPUT);
   pinMode(OBS, INPUT);
+  pinMode(11, OUTPUT);
 
   // joinAP
   Serial.print("joinAP: ");
@@ -89,6 +90,7 @@ void loop() {
   float distance = 0;
   float obstacle = 0;
   
+  digitalWrite(21, LOW);
   digitalWrite(TRIG, HIGH); //TRIG 오픈 (초음파 발사)
   delayMicroseconds(10);
   digitalWrite(TRIG, LOW); //TRIG 오픈 (초음파 종료)
@@ -131,6 +133,7 @@ void loop() {
   }
   
   if(weight > 700) { //무게 이상
+      digitalWrite(21, HIGH);
       sprintf(INSERT_SQL, "INSERT INTO state VALUES (Product001)"); //SQL 문 설정
       if (conn.connected()) {
           cursor->execute(INSERT_SQL); //DB에 SQL 입력
@@ -138,6 +141,7 @@ void loop() {
   }
   
   if(distance < 700) { //거리 이상
+      digitalWrite(21, HIGH);
       sprintf(INSERT_SQL, "INSERT INTO state VALUES (Product001)"); //SQL 문 설정
       if (conn.connected()) {
           cursor->execute(INSERT_SQL); //DB에 SQL 입력
@@ -145,6 +149,7 @@ void loop() {
   }
   
   if(myIMU.myt < -10 || myIMU.my > 10) { //무게 중심 이상
+      digitalWrite(21, HIGH);
       sprintf(INSERT_SQL, "INSERT INTO state VALUES (Product001)"); //SQL 문 설정
       if (conn.connected()) {
           cursor->execute(INSERT_SQL); //DB에 SQL 입력
