@@ -124,13 +124,34 @@ void loop() {
   Serial.print("test: ");
   Serial.println(getStatus(wifi.test()));
   
-  sprintf(INSERT_SQL, "INSERT INTO test02.sensor VALUES (Product001, %f, %f, %f, %f)", weight, distance, myIMU.my, obstacle); //SQL 문 설정
-
+  sprintf(INSERT_SQL, "INSERT INTO sensor VALUES (Product001, %f, %f, %f, %f)", weight, distance, myIMU.my, obstacle); //SQL 문 설정
+  
   if (conn.connected()) {
     cursor->execute(INSERT_SQL); //DB에 SQL 입력
   }
   
-  delay(1000); //1초
+  if(weight > 700) { //무게 이상
+      sprintf(INSERT_SQL, "INSERT INTO state VALUES (Product001)"); //SQL 문 설정
+      if (conn.connected()) {
+          cursor->execute(INSERT_SQL); //DB에 SQL 입력
+      }
+  }
+  
+  if(distance < 700) { //거리 이상
+      sprintf(INSERT_SQL, "INSERT INTO state VALUES (Product001)"); //SQL 문 설정
+      if (conn.connected()) {
+          cursor->execute(INSERT_SQL); //DB에 SQL 입력
+      }
+  }
+  
+  if(myIMU.myt < -10 || myIMU.my > 10) { //무게 중심 이상
+      sprintf(INSERT_SQL, "INSERT INTO state VALUES (Product001)"); //SQL 문 설정
+      if (conn.connected()) {
+          cursor->execute(INSERT_SQL); //DB에 SQL 입력
+      }
+  }
+  
+  delay(5000); //5초
 }
 
 String getStatus(ESP8266CommandStatus status)
