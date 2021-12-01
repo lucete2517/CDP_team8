@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> 
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin page</title>
+</head>
+<body>
+    <!-- rendering 된 data를 parsing 하기위한 변수 선언 -->
+    <% let acc_time_stamp = [] %>
+    <% let total_time_stamp = [] %>
+    <% let total_num = [] %>
+    <% let acc_num = [] %>
+    <% let per = [] %>
+
+    <!-- state table (사고 사례) 에 대한 data parsing-->
+
+    <!-- time_stamp ( label parsing )-->
+    <% for(var j=0; j<data[0].length; j++) {%>
+        <% time_stamp = data[0][j].TIME.slice(0, 10)%>
+        <% if(total_time_stamp.indexOf(time_stamp) === -1) {%>
+            <% total_time_stamp.push(time_stamp) %>
+        <%}%>
+    <%}%>
+
+    <!-- parsing initialize -->
+    <% for(var j=0; j<total_time_stamp.length; j++) {%>
+        <% acc_num.push(0) %>
+        <% total_num.push(0) %>
+    <%}%>
+
+    <!-- module table parsing -->
+    <% for(var j=0; j<data[0].length; j++) {%>
+        <%time_stamp = data[0][j].TIME.slice(0, 10)%>
+        <% total_num[total_time_stamp.indexOf(time_stamp)] += 1 %>
+    <%}%>
+
+    <!-- state table parsing -->
+    <% for(var j=0; j<data[1].length; j++) {%>
+        <%time_stamp = data[1][j].TIME.slice(0, 10)%>
+        <% acc_num[total_time_stamp.indexOf(time_stamp)] += 1 %>
+    <%}%>
+
+    <!-- state / module 을 이용해 날짜별 사고확률 (percent)-->
+    <% for(var j=0; j<total_time_stamp.length; j++) {%>
+            <% per.push((acc_num[j] / total_num[j]) * 100) %>
+    <%}%>
+
+    <canvas id = "line-chart" width = "600vw" height="600vw"></canvas> <br>
+
+    <script>
+        const lineChart = new Chart(document.getElementById("line-chart"), {
+            type: 'line',
+            data: {
+            labels: <%- JSON.stringify(total_time_stamp); %> ,
+            datasets: [
+                {
+                data: <%- JSON.stringify(per); %>,
+                label: "사고(percent)",
+                borderColor: "#c45850",
+                fill: false
+                }
+            ]
+            },
+            options: {
+                responsive:false,
+                scales: {
+				    yAxes: [{
+					    ticks: {
+						    min: 0,
+						    max: 100,
+					    }
+				    }]
+			    },
+                title: {
+                    display: true,
+                    text: '날짜별 사고 현황'
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
