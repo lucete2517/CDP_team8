@@ -1,3 +1,6 @@
 # CDP_team8
-종합설계프로젝트, 작업자 안전 플랫폼 개발
+아두이노 코드
 
+test_ver.01 = wifi 연결 성공 (/libraries에 ESP8266 include) -> wifi serial = serial2
+
+next_ver)beta_ver01 예정. (db에 센서값 저장.)
